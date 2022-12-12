@@ -1,0 +1,108 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{ dsfont }
+\usepackage{ amssymb }
+\usepackage{fullpage}
+\title{Trabajo Pr\'actico - Clasificaci\'on }
+\author{Kenet Chapet\'on  Camilo D'Aloisio  Agustin Arias}
+\date{Diciembre 2022}
+
+\begin{document}
+\maketitle
+
+\newpage 
+\section{Parte Te\'orica}
+\\ 
+Ejericio 1: 
+\\
+\\
+Por definici\'on tenemos 
+\\ 
+$$ L(g) = \mathds{P} (g(\mathbf{X}) \neq Y) = \mathds{E}_{(\mathbf{X},Y)}[\mathds{1}_{\{g(\mathbf{X})\neq Y\}}] $$
+\\
+Luego por propiedades de la esperanza condicional tenemos que 
+\\ 
+$$ \mathds{E}_{(\mathbf{X},Y)}[I_{g(\mathbf{X}\neq Y)}] = \mathds{E}_{\mathbf{X}}[ \mathds{E}_{Y|\mathbf{X}}[\mathds{1}_{\{g(\mathbf{X}\neq Y)\}}]] = \mathds{E}_{\mathbf{X}}[\mathds{1}_{\{g(\mathbf{X})\neq 1 \}}\mathds{P}(Y=1|\mathbf{X}=\mathbf{x}) + \mathds{1}_{\{g(\mathbf{X})\neq0\}}\mathds{P}(Y=0|\mathbf{X}=\mathbf{x})]$$
+\\
+Entonces para minimizar $ L(g) $ es suficiente con minimizar el argumento de la esperanza, puesto que es una funci\'on creciente: 
+\\
+$$\mathds{1}_{\{g(\mathbf{X})\neq 1 \}}\cdot\mathds{P}(Y=1|\mathbf{X}=\mathbf{x}) + \mathds{1}_{\{g(\mathbf{X})\neq0\}}\cdot\mathds{P}(Y=0|\mathbf{X}=\mathbf{x})  \hspace{1cm} (\forall \mathbf{x} ) $$
+\\ 
+Como los argumentos de las indicadoras determinan conjuntos disjuntos, es decir que 
+\\ 
+$$ \{ \omega : g(\mathbf{X}(\omega))\neq 1\} \cap \{ \omega : g(\mathbf{X}(\omega))\neq 0\} = \emptyset $$
+\\
+Tenemos que $g^{op}$ est\'a determinada como: 
+\\
+$$ g^{op}(\mathbf{x}) = \left\{ \begin{array}{lcc}
+             1 &   si  & \mathds{P}(Y=1|\mathbf{X}=\mathbf{x}) \geq \mathds{P}(Y=0|\mathbf{X} = \mathbf{x}) \\
+             \\ 0 &  si & \mathds{P}(Y=1|\mathbf{X}=\mathbf{x}) < \mathds{P}(Y=0|\mathbf{X} = \mathbf{x}) \\
+             \end{array}
+   \right. $$ 
+\\
+\\
+Ejercicio 2: 
+\\
+\\
+Por Bayes y multiplicando y dividiendo por $\mathds{P}(Y=y)$: 
+\\
+$$ \mathds{P}(Y =y | \mathbf{X} = \mathbf{x}) = \frac{\mathds{P}(\mathbf{X} =\mathbf{x}, Y=y)}{\mathds{P}(\mathbf{X}=\mathbf{x})} \cdot \frac{\mathds{P}(Y=y)}{\mathds{P}(Y=y)} = \frac{\mathds{P}(\mathbf{X}=\mathbf{x}|Y=y) \cdot\mathds{P}(Y=y)}{\mathds{P}(\mathbf{X} = \mathbf{x})}  $$
+\\
+luego reemplazando en  $\mathds{P}(Y=1|\mathbf{X}=\mathbf{x}) \geq \mathds{P}(Y=0|\mathbf{X} = \mathbf{x}) $ obtenemos: 
+\\ 
+$$ \frac{\mathds{P}(\mathbf{X}=\mathbf{x}|Y=1) \cdot\mathds{P}(Y=1)}{\mathds{P}(\mathbf{X} = \mathbf{x})} \geq \frac{\mathds{P}(\mathbf{X}=\mathbf{x}|Y=0) \cdot\mathds{P}(Y=0)}{\mathds{P}(\mathbf{X} = \mathbf{x})} $$
+\\
+$$ \mathds{P}(\mathbf{X}=\mathbf{x}|Y=1) \cdot\mathds{P}(Y=1) \geq \mathds{P}(\mathbf{X}=\mathbf{x}|Y=0) \cdot \mathds{P}(Y=0) $$
+\\
+Por supuesto todo tiene sentido siempre y cuando $\mathds{P}(\mathbf{X} =\mathbf{x}) \neq 0 $ u equivalentemente no sea $ \{ \omega : \mathbf{X}(\omega) = \mathbf{x}\}$, un conjunto de medida nula
+\\ 
+Sumado a: 
+\\ 
+$$\mathbf{X}|Y=1 \sim f_1 \hspace{0.5cm}  \mathbf{X}|Y=0 \sim f_0 \hspace{0.5cm} \pi_1 = \mathds{P}(Y=1) \hspace{0.5cm} \pi_0 = \mathds{P}(Y=0)$$
+\\ 
+Obtenemos  
+\\
+$$ g^{op}(\mathbf{x}) = \left\{ \begin{array}{lcc}
+             1 &   si  & f_{1}(\mathbf{x}) \cdot \pi_1  \geq f_{0}(\mathbf{x})\cdot \pi_0 \\
+             \\ 0 &  si & f_{1}(\mathbf{x}) \cdot \pi_1  < f_{0}(\mathbf{x})\cdot \pi_0 \\
+             \end{array}
+   \right. $$ 
+\\
+\\
+Ejercicio 3: 
+\\
+\\
+Como tenemos que: 
+$$ \mathbf{X}|Y=1 \sim \mathcal{N} (\mu_1,\Sigma_1) \hspace{0.5cm} \mathbf{X}|Y=0 \sim \mathcal{N} (\mu_0,\Sigma_0) $$ 
+\\ 
+reemplazando en $ f_{1}(\mathbf{x}) \cdot \pi_1  \geq f_{0}(\mathbf{x})\cdot \pi_0$ 
+\\ 
+$$ \frac{e^{-1/2 \cdot (\mathbf{x}-\mu_1)^t\Sigma^{-1}_{1} (\mathbf{x}-\mu_1)}}{ (2\pi)^{p/2} det(\Sigma_1)^{1/2} } \cdot \pi_1  \geq  \frac{e^{-1/2 \cdot (\mathbf{x}-\mu_0)^t\Sigma^{-1}_{0} (\mathbf{x}-\mu_0)}}{ (2\pi)^{p/2} det(\Sigma_0)^{1/2}}\cdot \pi_0$$
+\\
+donde $0 \leq \pi_i,det(\Sigma_{i})$  puesto que $\pi_{i}$ son probabilidades y $\Sigma_i$ son definidas positivas. \hspace{0.5cm} ($\forall i \in \{0,1\}$)
+\\ 
+$$ e^{ -1/2 \cdot [ (\mathbf{x}-\mu_1)^t\Sigma^{-1}_{1} (\mathbf{x}-\mu_1) - (\mathbf{x}-\mu_0)^t\Sigma^{-1}_{0} (\mathbf{x}-\mu_0)] } \geq \sqrt{\frac{det(\Sigma_1)}{det(\Sigma_0)}} \frac{\pi_0}{\pi_1} $$
+\\
+Tomamos $\ln$ a ambos miembros, (es una funci\'on creciente) 
+\\
+$$  -1/2 \cdot [ (\mathbf{x}-\mu_1)^t\Sigma^{-1}_{1} (\mathbf{x}-\mu_1) - (\mathbf{x}-\mu_0)^t\Sigma^{-1}_{0} (\mathbf{x}-\mu_0)] \geq (1/2)ln(\frac{det(\Sigma_1)}{det(\Sigma_0)})  + ln(\frac{\pi_0}{\pi_1}) $$
+\\
+reemplazamos los $ r_{i}(\mathbf{x})= (\mathbf{x}-\mu_i)^t\Sigma^{-1}_{i} (\mathbf{x}-\mu_i)  $ y multiplicamos por 2 a ambos miembros \hspace{0.5cm} ($\forall i \in \{0,1\} $)
+\\
+$$ -r_{1}(\mathbf{x}) +  r_{0}(\mathbf{x}) \geq  ln(\frac{det(\Sigma_1)}{det(\Sigma_0)})+ 2 ln(\frac{\pi_0}{\pi_1}) $$
+\\
+$$ r_0(\mathbf{x}) - ln(\frac{det(\Sigma_1)}{det(\Sigma_0)})- 2 ln(\frac{\pi_0}{\pi_1}) \geq r_1(\mathbf{x}) $$
+\\
+$$ r_0(\mathbf{x}) + ln(\frac{det(\Sigma_0)}{det(\Sigma_1)}) + 2 ln(\frac{\pi_1}{\pi_0}) \geq r_1(\mathbf{x}) $$
+\\
+Por lo tanto 
+\\ 
+$$ g^{op}(\mathbf{x}) = \left\{ \begin{array}{lcc}
+             1 &   si  & r_0(\mathbf{x}) + ln(\frac{det(\Sigma_0)}{det(\Sigma_1)}) + 2 ln(\frac{\pi_1}{\pi_0}) \geq r_1(\mathbf{x}) \\
+             \\ 0 & en \hspace{0.2cm} c.c &  \\
+             \end{array}
+   \right. $$ 
+\\
+\end{document}
+
+
